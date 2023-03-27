@@ -6,13 +6,14 @@ import * as argon from 'argon2';
 import { Prisma } from '@prisma/client';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
+import { UserUpdateDto } from './dto/user-update.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private prisma: PrismaService,
     private config: ConfigService,
-    private jwt:JwtService
+    private jwt: JwtService,
   ) {}
 
   async user(dto: UserDto) {
@@ -28,7 +29,7 @@ export class UserService {
           hash_pass,
         },
       });
-      return this.signToken(user.id,user.email);
+      return this.signToken(user.id, user.email);
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
@@ -55,7 +56,7 @@ export class UserService {
     if (!pwMatch) {
       throw new ForbiddenException('credentils incorrect');
     }
-    return this.signToken(user.id,user.email)
+    return this.signToken(user.id, user.email);
   }
 
   async signToken(
@@ -79,20 +80,24 @@ export class UserService {
   //***************Find All USERS**********
 
   findAll() {
-    return this.prisma.user.findMany();
+    const where = { deletedAt: null };
+    return this.prisma.user.findMany({
+      where: where,
+    });
   }
 
   // **********Find A USER ***********
   findOne(id: string) {
-    return this.prisma.user.findUnique({
-      where: { id: Number(id) },
-    });
+    const userDeleted = {deletedAt : null}
+      return this.prisma.user.findUnique({
+        where: { id: Number(id) },
+      });
+    
   }
 
   // ***********Update user************(not done)
-  updateUser(id: string, user: UserDto) {
+  updateUser(id: string, user: UserUpdateDto) {
     return this.prisma.user.update({
-      
       where: { id: Number(id) },
       data: user,
     });
@@ -100,8 +105,10 @@ export class UserService {
 
   // ***********Delete user **********
   deleteUser(id: string) {
-    return this.prisma.user.delete({
+    const user = { deletedAt: new Date() };
+    return this.prisma.user.update({
       where: { id: Number(id) },
+      data: user,
     });
   }
 }
