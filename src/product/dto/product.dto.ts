@@ -1,6 +1,9 @@
-import { IsString, IsNotEmpty, IsDecimal } from 'class-validator';
+import { IsString, IsNotEmpty, IsDecimal, IsOptional } from 'class-validator';
 
 export class ProductDto {
+  @IsOptional()
+  deletedAt:string;
+
   @IsString()
   // @IsNotEmpty()
   image: string;

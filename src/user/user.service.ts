@@ -88,14 +88,13 @@ export class UserService {
 
   // **********Find A USER ***********
   findOne(id: string) {
-    const userDeleted = {deletedAt : null}
-      return this.prisma.user.findUnique({
-        where: { id: Number(id) },
-      });
-    
+    const where = { id: Number(id), deletedAt: null };
+    return this.prisma.user.findFirst({
+      where: where,
+    });
   }
 
-  // ***********Update user************(not done)
+  // ***********Update user************
   updateUser(id: string, user: UserUpdateDto) {
     return this.prisma.user.update({
       where: { id: Number(id) },

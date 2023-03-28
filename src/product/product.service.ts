@@ -32,13 +32,18 @@ export class ProductService {
       throw error;
     }
   }
+
   findAll() {
-    return this.prisma.product.findMany();
+    const where = { deletedAt: null };
+    return this.prisma.product.findMany({
+      where: where,
+    });
   }
 
   findOne(id: string) {
-    return this.prisma.product.findUnique({
-      where: { id: Number(id) },
+    const where = { id: Number(id), deletedAt: null };
+    return this.prisma.product.findFirst({
+      where: where,
     });
   }
 
@@ -50,8 +55,10 @@ export class ProductService {
   }
 
   deleteProduct(id: string) {
-    return this.prisma.product.delete({
+    const product = { deletedAt: new Date() };
+    return this.prisma.product.update({
       where: { id: Number(id) },
+      data: product,
     });
   }
 }
