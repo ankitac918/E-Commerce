@@ -43,4 +43,10 @@ export class UserController {
   deleteUser(@Param('id') id: string) {
     return this.userService.deleteUser(id);
   }
+
+  @Delete('user/:id')
+  deleteUserPermanent(@Param('id') id: string) {
+    return this.userService.deleteUserPermanent(id);
+  }
 }
+ 

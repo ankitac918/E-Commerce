@@ -41,7 +41,7 @@ export class ProductService {
   }
 
   findOne(id: string) {
-    const where = { id: Number(id), deletedAt: null };
+    const where = { id: id, deletedAt: null };
     return this.prisma.product.findFirst({
       where: where,
     });
@@ -49,16 +49,21 @@ export class ProductService {
 
   updateProduct(id: string, product: ProductDto) {
     return this.prisma.product.update({
-      where: { id: Number(id) },
+      where: { id: id },
       data: product,
     });
   }
-
   deleteProduct(id: string) {
     const product = { deletedAt: new Date() };
     return this.prisma.product.update({
-      where: { id: Number(id) },
+      where: { id: id },
       data: product,
+    });
+  }
+  
+  deleteProductPermanent(id: string) {
+    return this.prisma.product.delete({
+      where: { id: id },
     });
   }
 }

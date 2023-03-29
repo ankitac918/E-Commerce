@@ -40,7 +40,7 @@ export class ProductController {
   addProduct(
     @Body() dto: ProductDto,
     // @UploadedFiles() image: Array<Express.Multer.File>,
-  ) {
+  ) { 
     // console.log(image);
 
     return this.productService.addProduct(dto);
@@ -65,5 +65,9 @@ export class ProductController {
   @Delete(':id')
   deleteProduct(@Param('id') id: string) {
     return this.productService.deleteProduct(id);
+  }
+  @Delete('product/:id')
+  deleteProductPermanent(@Param('id') id: string) {
+    return this.productService.deleteProductPermanent(id);
   }
 }
