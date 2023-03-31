@@ -32,26 +32,38 @@ export class ProductService {
       throw error;
     }
   }
+
   findAll() {
-    return this.prisma.product.findMany();
+    const where = { deletedAt: null };
+    return this.prisma.product.findMany({
+      where: where,
+    });
   }
 
   findOne(id: string) {
-    return this.prisma.product.findUnique({
-      where: { id: Number(id) },
+    const where = { id: id, deletedAt: null };
+    return this.prisma.product.findFirst({
+      where: where,
     });
   }
 
   updateProduct(id: string, product: ProductDto) {
     return this.prisma.product.update({
-      where: { id: Number(id) },
+      where: { id: id },
       data: product,
     });
   }
-
   deleteProduct(id: string) {
+    const product = { deletedAt: new Date() };
+    return this.prisma.product.update({
+      where: { id: id },
+      data: product,
+    });
+  }
+  
+  deleteProductPermanent(id: string) {
     return this.prisma.product.delete({
-      where: { id: Number(id) },
+      where: { id: id },
     });
   }
 }

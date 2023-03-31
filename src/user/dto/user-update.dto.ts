@@ -1,16 +1,13 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class UserDto{
+export class UserUpdateDto{
+    @IsString()
     @IsOptional()
-    deletedAt:string;
+    first_name:string;
 
     @IsString()
     @IsOptional()
-    firstName:string;
-
-    @IsString()
-    @IsOptional()
-    lastName:string;
+    last_name:string;
 
     @IsString()
     @IsOptional()
@@ -20,12 +17,4 @@ export class UserDto{
     @IsOptional()
     phone:string
     
-    @IsString()
-    @IsNotEmpty()
-    @IsEmail()
-    email:string
-
-    @IsString()
-    @IsNotEmpty()
-    password:string
 }

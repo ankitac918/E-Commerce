@@ -8,10 +8,11 @@ datasource db {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  image       String
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  image       String 
   name        String
   price       Decimal
   description String
@@ -22,15 +23,16 @@ model Product {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  first_name String? 
-  last_name  String?
-  address    String?
-  phone      String?
-  email      String   @unique
-  hash_pass  String
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  firstName    String?
+  lastName     String?
+  address      String?
+  phone        String?
+  email        String    @unique
+  hashPassword String
 
   @@map("users")
 }
