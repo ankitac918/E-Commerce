@@ -26,6 +26,10 @@ export class UserDto{
     email:string
 
     @IsString()
+    @IsOptional()
+    image: string;
+
+    @IsString()
     @IsNotEmpty()
     password:string
 }

@@ -30,8 +30,10 @@ model User {
   firstName    String?
   lastName     String?
   address      String?
+  city         String?
   phone        String?
   email        String    @unique
+  image        String?
   hashPassword String
 
   @@map("users")
