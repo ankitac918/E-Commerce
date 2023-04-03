@@ -2,6 +2,14 @@ import { IsOptional, IsString } from "class-validator";
 
 export class addressDto {
     @IsString()
+    @IsOptional()
+    userId:string
+
+    @IsString()
+    @IsOptional()
+    token:string
+
+    @IsString()
     categories:string;
 
     @IsString()

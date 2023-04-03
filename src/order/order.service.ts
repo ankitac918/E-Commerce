@@ -13,6 +13,7 @@ export class OrderService {
       const order = await this.prisma.order.create({
         data: {
           productId: dto.productId,
+          userId:dto.userId,
           token: dto.token,
           name: dto.name,
           description: dto.description,
@@ -20,7 +21,9 @@ export class OrderService {
           location: dto.location,
           address: dto.address,
           city: dto.city,
+          zipCode:dto.zipCode,
           paymentType: dto.paymentType,
+          locationType:dto.locationType,
           quantity: dto.quantity,
         },
       });

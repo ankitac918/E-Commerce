@@ -1,8 +1,12 @@
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class orderDto {
   @IsString()
   productId: string;
+  
+  @IsString()
+  @IsOptional()
+  userId: string;
 
   @IsString()
   token: string;
@@ -24,9 +28,17 @@ export class orderDto {
 
   @IsString()
   city: string;
+
+  @IsString()
+  @ IsOptional()
+  zipCode: string;
   
   @IsString()
   paymentType: string;
+
+  @IsString()
+  @IsOptional()
+  locationType: string;
 
   @IsString()
   quantity: string;

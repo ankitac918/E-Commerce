@@ -29,8 +29,6 @@ model User {
   deletedAt    DateTime?
   firstName    String?
   lastName     String?
-  address      String?
-  city         String?
   phone        String?
   email        String    @unique
   image        String?
@@ -44,6 +42,8 @@ model address {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
   deletedAt           DateTime?
+  userId              String?
+  token               String?
   categories          String
   streetAddress       String
   city                String
@@ -56,20 +56,23 @@ model address {
 }
 
 model order {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-  productId   String
-  token       String
-  name        String
-  description String
-  price       String
-  location    String
-  address     String
-  city        String
-  paymentType String
-  quantity    String
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  productId    String?
+  userId       String?
+  token        String
+  name         String
+  description  String
+  price        String
+  location     String
+  address      String
+  city         String
+  zipCode      String?
+  paymentType  String
+  locationType String?
+  quantity     String
 
   @@map("orders")
 }

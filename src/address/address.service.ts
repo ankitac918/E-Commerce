@@ -12,6 +12,8 @@ export class AddressService {
     try {
       const address = await this.prisma.address.create({
         data: {
+          userId:dto.userId,
+          token:dto.token,
           categories: dto.categories,
           streetAddress: dto.streetAddress,
           city: dto.streetAddress,
