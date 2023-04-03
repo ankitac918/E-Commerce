@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { Prisma } from '@prisma/client';
 import { addressDto } from './dto';
@@ -8,7 +8,7 @@ import { addressDto } from './dto';
 export class AddressService {
   constructor(private prisma: PrismaService) {}
 
-  async addAddress(dto: addressDto) {
+  async addAddress(dto:addressDto) {
     try {
       const address = await this.prisma.address.create({
         data: {

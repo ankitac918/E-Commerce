@@ -1,31 +1,31 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class UserDto {
-  @IsOptional()
-  deletedAt: string;
+export class UserDto{
+    @IsOptional()
+    deletedAt:string;
 
-  @IsString()
-  @IsOptional()
-  firstName: string;
+    @IsString()
+    @IsOptional()
+    firstName:string;
 
-  @IsString()
-  @IsOptional()
-  lastName: string;
+    @IsString()
+    @IsOptional()
+    lastName:string;
 
-  @IsString()
-  @IsOptional()
-  phone: string;
+    @IsString()
+    @IsOptional()
+    phone:string
+    
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    email:string
 
-  @IsString()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
+    @IsString()
+    @IsOptional()
+    image:string
 
-  @IsString()
-  @IsOptional()
-  image: string;
-
-  @IsString()
-  @IsNotEmpty()
-  password: string;
+    @IsString()
+    @IsNotEmpty()
+    password:string
 }
