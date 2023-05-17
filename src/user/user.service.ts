@@ -23,9 +23,9 @@ export class UserService {
         data: {
           firstName: dto.firstName,
           lastName: dto.lastName,
-          address: dto.address,
           phone: dto.phone,
           email: dto.email,
+          image:dto.image,
           hashPassword,
   
         },

@@ -12,7 +12,7 @@ model Product {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  image       String 
+  image       String
   name        String
   price       Decimal
   description String
@@ -29,10 +29,50 @@ model User {
   deletedAt    DateTime?
   firstName    String?
   lastName     String?
-  address      String?
   phone        String?
   email        String    @unique
+  image        String?
   hashPassword String
 
   @@map("users")
+}
+
+model address {
+  id                  String    @id @default(uuid())
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+  userId              String?
+  token               String?
+  categories          String
+  streetAddress       String
+  city                String
+  zipCode             String
+  deliveryInstruction String?
+  feedback            String?
+  locationType        String
+
+  @@map("address")
+}
+
+model order {
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  productId    String?
+  userId       String?
+  token        String
+  name         String
+  description  String
+  price        String
+  location     String
+  address      String
+  city         String
+  zipCode      String?
+  paymentType  String
+  locationType String?
+  quantity     String
+
+  @@map("orders")
 }

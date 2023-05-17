@@ -14,16 +14,16 @@ export class UserDto{
 
     @IsString()
     @IsOptional()
-    address:string
-
-    @IsString()
-    @IsOptional()
     phone:string
     
     @IsString()
     @IsNotEmpty()
     @IsEmail()
     email:string
+
+    @IsString()
+    @IsOptional()
+    image:string
 
     @IsString()
     @IsNotEmpty()
